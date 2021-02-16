@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Подключение Bootstrap чтобы все выглядело красиво -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <title>Чат получаеца...</title>
+    <!-- Свои стили -->
+    <style>
+        body {
+            background: #fcfcfc;
+        }
+    </style>
+</head>
+<body>
+    <!-- Основная часть страницы -->
+    <div class="container">
+        <div class="py-5 text-center">
+            <h2>Чат? Ну типа</h2>
+            <p class="lead">Укажите ваше имя и начинайте переписку</p>
+        </div>
+        <div class="column">
+            <div class="col-15">
+                <h3>Сообщения</h3>
+                    <% for (let i = 0; i < messages.length; i++) { %>
+                        <div class='alert alert-secondary'><b><%= messages[i]["User"] %></b>: <%= messages[i]["Text"] %></div>
+                    <% } %>
+                <div id="all_mess"></div>
+            </div>
+            <br>
+            <div class="col-15">
+                <h3>Форма сообщений</h3>
+                <form id="messForm">
+                    <label for="name">Имя</label>
+                    <input type="text" name="name" id="name" placeholder="Введите имя" class="form-control">
+                    <br>
+                    <label for="message">Сообщение</label>
+                    <textarea name="message" id="message" class="form-control" placeholder="Введите сообщение"></textarea>
+                    <br>
+                    <input type="submit" value="Отправить" class="btn btn-danger">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Подключаем jQuery, а также Socket.io -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        $(function() {
+            let socket = io.connect();
+
+            let $form = $("#messForm"); // Форму сообщений
+            let $name = $("#name"); // Поле с именем
+            let $textarea = $("#message"); // Текстовое поле
+            let $all_messages = $("#all_mess"); // Блок с сообщениями
+
+            $form.submit(function(event) {
+                event.preventDefault();
+
+                socket.emit('send mess', {mess: $textarea.val(), name: $name.val()});
+
+                $textarea.val('');
+            });
+
+
+            socket.on('add mess', function(data) {
+                $all_messages.append("<div class='alert alert-secondary'><b>" + data.name + "</b>: " + data.mess + "</div>");
+            });
+        });
+    </script>
+</body>
+</html>
