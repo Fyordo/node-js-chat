@@ -48,5 +48,5 @@ module.exports.Register = function (req, res){
     else{
         res.status(400).render("reg.ejs", {status: "Пароли не совпадают"});
     }
-    res.status(200).redirect("/")
+    res.status(200).redirect("/auth")
 }

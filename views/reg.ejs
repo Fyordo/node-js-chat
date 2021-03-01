@@ -2,22 +2,41 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Регистрация</title>
+    <!-- Подключение Bootstrap чтобы все выглядело красиво -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background: #fcfcfc;
+        }
+
+    </style>
+    <title>Авторизация</title>
 </head>
 <body>
-    <form action="/reg" method="post">
-        <input type="text" name="name" placeholder="Введите ник"><br>
-        <input type="text" name="pass" placeholder="Введите пароль"><br>
-        <input type="text" name="pass_conf" placeholder="Подтвердите пароль"><br>
-        <button>Submit</button>
-    </form>
-    <a href="/auth">Уже есть аккаунт? Авторизоваться</a>
-    <br>
-    <br>
-    <br>
-    <h2 align="center"><%= status %></h2>
+    <%- include('blocks/header.ejs') -%>
+    <div class="container">
+        <br>
+        <br>
+        <br>
+        <div class="col-15">
+            <h3 align="center">Зарегайтесь</h3>
+        </div>
+        <br>
+        <br>
+        <br>
+        <form action="/reg" method="post">
+            <input type="text" name="name" placeholder="Введите ник"><br><br>
+            <input type="text" name="pass" placeholder="Введите пароль"><br><br>
+            <input type="text" name="pass_conf" placeholder="Подтвердите пароль"><br><br>
+            <button class="btn btn-danger">Зарегаться</button>
+        </form>
+        <a href="/auth">Уже есть аккаунт? Авторизоваться</a>
+        <br>
+        <br>
+        <br>
+        <h2 align="center"><%= status %></h2>
+    </div>
 </body>
 </html>

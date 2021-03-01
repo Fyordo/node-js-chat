@@ -1,15 +1,11 @@
 const express = require("express")
 const app = express()
 
-const mysql = require("mysql");
-const db = require("./config/db");
+const mysql = require("mysql")
+const db = require("./config/db")
 
-const server = require("http").createServer(app);
-const io = require("socket.io")(server, {
-    cors: {
-        origin: "http://localhost:3000",
-    },
-})
+const server = require("http").createServer(app)
+const io = require("socket.io")(server)
 
 server.listen(3000)
 
@@ -40,15 +36,17 @@ io.on('connection', function(socket) {
     });
 
     socket.on('send mess', function(data) {
-        let connection = mysql.createConnection(db.db_link);
-        connection.query("INSERT INTO `messages` (`User`, `Text`) VALUES (?, ?)", [data.name, data.mess], function (err, results){
-            if (err !== null){
-                console.log("Ошибка запроса к базе данных: " + err) // Ошибка
-            }
-        })
-        connection.end()
+        if (data.name !== ""){
+            let connection = mysql.createConnection(db.db_link);
+            connection.query("INSERT INTO `messages` (`User`, `Text`) VALUES (?, ?)", [data.name, data.mess], function (err, results){
+                if (err !== null){
+                    console.log("Ошибка запроса к базе данных: " + err) // Ошибка
+                }
+            })
+            connection.end()
 
 
-        io.emit('add mess', {mess: data.mess, name: data.name});
+            io.emit('add mess', {mess: data.mess, name: data.name});
+        }
     });
 });

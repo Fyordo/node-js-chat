@@ -6,20 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- Подключение Bootstrap чтобы все выглядело красиво -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-    <title>Чат получаеца...</title>
-    <!-- Свои стили -->
     <style>
         body {
             background: #fcfcfc;
         }
+
     </style>
+    <title>Чат получаеца...</title>
 </head>
 <body>
+    <%- include('blocks/header.ejs') -%>
     <!-- Основная часть страницы -->
     <div class="container">
         <div class="py-5 text-center">
             <h2>Чат? Ну типа</h2>
-            <p class="lead">Укажите ваше имя и начинайте переписку</p>
+            <p class="lead">Вк посасал</p>
+            <p class="lead">Авторизуйтесь и начинайте переписку</p>
         </div>
         <div class="column">
             <div class="col-15">
@@ -34,7 +36,7 @@
                 <h3>Форма сообщений</h3>
                 <form id="messForm">
                     <label for="name">Имя</label>
-                    <input type="text" name="name" id="name" placeholder="Введите имя" class="form-control">
+                    <input type="text" name="name" id="name" placeholder="Введите имя" class="form-control" value="<%= name %>" readonly>
                     <br>
                     <label for="message">Сообщение</label>
                     <textarea name="message" id="message" class="form-control" placeholder="Введите сообщение"></textarea>
