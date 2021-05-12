@@ -20,14 +20,13 @@
     <div class="container">
         <div class="py-5 text-center">
             <h2>Чат? Ну типа</h2>
-            <p class="lead">Вк посасал</p>
             <p class="lead">Авторизуйтесь и начинайте переписку</p>
         </div>
         <div class="column">
             <div class="col-15">
                 <h3>Сообщения</h3>
                     <% for (let i = 0; i < messages.length; i++) { %>
-                        <div class='alert alert-secondary'><b><%= messages[i]["User"] %></b>: <%= messages[i]["Text"] %></div>
+                        <div class='alert alert-secondary'><b><%= messages[i]["username"] %></b>:<br> <%= messages[i]["text"] %></div>
                     <% } %>
                 <div id="all_mess"></div>
             </div>

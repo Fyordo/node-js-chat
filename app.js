@@ -7,7 +7,10 @@ const db = require("./config/db")
 const server = require("http").createServer(app)
 const io = require("socket.io")(server)
 
-server.listen(3000)
+const port = 3000;
+server.listen(port, 'localhost', function() {
+    console.log('Listening to port: ' + port);
+})
 
 app.set("view engine", "ejs")
 
@@ -47,6 +50,9 @@ io.on('connection', function(socket) {
 
 
             io.emit('add mess', {mess: data.mess, name: data.name});
+        }
+        else{
+
         }
     });
 });
